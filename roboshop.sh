@@ -6,7 +6,7 @@ INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipp
 # ZONE_ID="dsjnjsndnd"
 # DOMAIN_NAME="arun.in"
 
-#for instance in $@
+#for instance in $@ we can give instance when creting along with sh roboshop.sh mongodb
 for instance in "${INSTANCES[@]}"
 do
     echo "Launching instance: $instance"
