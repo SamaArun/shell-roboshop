@@ -60,7 +60,13 @@ done
 
 
 
+##IN SERVICE FILES WE NEED TO UPDATE THE IP
+##SAME IN NEGINX.CONF
+#once instances are installled and perticular packges are installed , we can check with below commands
+# netstat -lntp to check port
 
+# nslookup to check if route53 record is connect,
 
+# telenet to check if d=db is connected
 
 
