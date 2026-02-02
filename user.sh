@@ -24,7 +24,8 @@ else
 fi
 # validate function takes input as exit status, what commad they tried to install
 VALIDATE(){
-    if [ $1 -eq 0 ]; then
+    if [ $1 -eq 0 ]; 
+    then
         echo -e "$2 is ... $G SUCCESS $N" | tee -a $LOG_FILE
 
     else
