@@ -1,44 +1,39 @@
 #!/bin/bash
 
-# USERID=$(id -u)
-# R="\e[31m"
-# G="\e[32m"
-# Y="\e[33m"
-# N="\e[0m"
-# LOGS_FLODER="/var/log/roboshop-logs"
-# SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
-# LOG_FILE="$LOGS_FLODER/$SCRIPT_NAME.log"
+USERID=$(id -u)
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+LOGS_FLODER="/var/log/roboshop-logs"
+SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
+LOG_FILE="$LOGS_FLODER/$SCRIPT_NAME.log"
 
-# mkdir -p $LOGS_FLODER
-# echo "Script started executing at: $(date)" | tee -a $LOG_FILE
+mkdir -p $LOGS_FLODER
+echo "Script started executing at: $(date)" | tee -a $LOG_FILE
 
-# #check the user has root access or not
-# if [ $USERID -ne 0 ]; 
-# then
-#     echo -e "$R ERROR:: Please run this script with root access $N" | tee -a $LOG_FILE
+#check the user has root access or not
+if [ $USERID -ne 0 ]; 
+then
+    echo -e "$R ERROR:: Please run this script with root access $N" | tee -a $LOG_FILE
 
-#     exit 1
-# else
-#     echo "You are running with root access" | tee -a $LOG_FILE
+    exit 1
+else
+    echo "You are running with root access" | tee -a $LOG_FILE
 
-# fi
-# # validate function takes input as exit status, what commad they tried to install
-# VALIDATE(){
-#     if [ $1 -eq 0 ]; 
-#     then
-#         echo -e "$2 is ... $G SUCCESS $N" | tee -a $LOG_FILE
+fi
+# validate function takes input as exit status, what commad they tried to install
+VALIDATE(){
+    if [ $1 -eq 0 ]; 
+    then
+        echo -e "$2 is ... $G SUCCESS $N" | tee -a $LOG_FILE
 
-#     else
-#         echo -e "$2 is ... $R FAILURE $N" | tee -a $LOG_FILE
+    else
+        echo -e "$2 is ... $R FAILURE $N" | tee -a $LOG_FILE
 
-#         exit 1
-#     fi
-# }
-
-source ./common.sh
-app_name=mongodb
-
-check_root
+        exit 1
+    fi
+}
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "Coping MangoDB repo"
@@ -58,7 +53,9 @@ VALIDATE $? "Editing MongoDB conf file for remote connectios"
 systemctl restart mongod &>>$LOG_FILE
 VALIDATE $? "Restarting MogoDB"
 
-print_time
+END_TIME=$(date +%s)
+    TOTAL_TIME=$(($END_TIME - $START_TIME))
+    echo -e "Script executed successfully, $Y Time taken: $TOTAL_TIME seconds $N"
 
 # sed editor --> stream editor
 

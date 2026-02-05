@@ -1,5 +1,4 @@
 #!/bin/bash
-
 START_TIME=$(date +%s) #gives time in seconds
 USERID=$(id -u)
 R="\e[31m"
@@ -77,5 +76,4 @@ VALIDATE $? "Starting user"
 
 END_TIME=$(date +%s)
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
-
 echo -e "Script execution compepleted successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
