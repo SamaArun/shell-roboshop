@@ -81,7 +81,7 @@ cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing MngoDB Client"
 
-STATUS=$(mongosh --host MONGODB-SERVER-IPADDRESS --eval 'db.getMongo().getDBNames().indexof("Catalogue")') #to check if db is already there, if output(-1), them db is not there
+STATUS=$(mongosh --host MONGODB-SERVER-IPADDRESS --eval 'db.getMongo().getDBNames().indexOf("catalogue")') #to check if db is already there, if output(-1), them db is not there
 if [ $STATUS -lt 0 ]
 then
     mongosh --host MONGODB-SERVER-IPADDRESS </app/db/master-data.js &>>$LOG_FILE #change the IP ADDRESS
